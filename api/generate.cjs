@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -11,12 +11,11 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const configuration = new Configuration({
+    const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a helpful content creation assistant." },
@@ -25,7 +24,7 @@ module.exports = async (req, res) => {
       max_tokens: 500,
     });
 
-    const content = response.data.choices[0].message.content;
+    const content = completion.choices[0].message.content;
     res.status(200).json({ content });
   } catch (error) {
     console.error("Error generating content:", error);
