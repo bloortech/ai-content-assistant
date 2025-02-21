@@ -1,6 +1,6 @@
 // src/components/PromptForm.tsx
 import { useState } from 'react'
-import { Button, Input, Stack, useToast, Textarea } from '@chakra-ui/react'
+import { Button, Stack, useToast, Textarea } from '@chakra-ui/react'
 
 interface PromptFormProps {
   onGenerate: (prompt: string) => Promise<void>

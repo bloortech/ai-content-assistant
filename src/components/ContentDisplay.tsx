@@ -1,5 +1,5 @@
 // src/components/ContentDisplay.tsx
-import { Box, Button, Code, Icon, Text } from '@chakra-ui/react'
+import { Box, Button, Code} from '@chakra-ui/react'
 // import { FiCopy } from 'react-icons/fi'
 
 
