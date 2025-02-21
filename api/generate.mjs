@@ -1,4 +1,5 @@
-import { Configuration, OpenAIApi } from "openai";
+import pkg from "openai";
+const { Configuration, OpenAIApi } = pkg;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
 
   try {
     const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY, // from Vercel environment variables
+      apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 
