@@ -1,14 +1,15 @@
-import pkg from "openai";
-const { Configuration, OpenAIApi } = pkg;
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const { Configuration, OpenAIApi } = require('openai');
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { prompt } = req.body;
   if (!prompt) {
-    return res.status(400).json({ error: "No prompt provided" });
+    return res.status(400).json({ error: 'No prompt provided' });
   }
 
   try {
@@ -18,10 +19,10 @@ export default async function handler(req, res) {
     const openai = new OpenAIApi(configuration);
 
     const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
-        { role: "system", content: "You are a helpful content creation assistant." },
-        { role: "user", content: prompt },
+        { role: 'system', content: 'You are a helpful content creation assistant.' },
+        { role: 'user', content: prompt },
       ],
       max_tokens: 500,
     });
@@ -29,7 +30,7 @@ export default async function handler(req, res) {
     const content = response.data.choices[0].message.content;
     res.status(200).json({ content });
   } catch (error) {
-    console.error("Error generating content:", error);
-    res.status(500).json({ error: "Something went wrong" });
+    console.error('Error generating content:', error);
+    res.status(500).json({ error: 'Something went wrong' });
   }
 }
