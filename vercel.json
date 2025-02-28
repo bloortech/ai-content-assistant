@@ -1,22 +1,25 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.cjs", "use": "@vercel/node" },
-    { 
-      "src": "package.json", 
+    {
+      "src": "api/**/*.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
       "use": "@vercel/static-build",
-      "config": { 
+      "config": {
         "distDir": "build",
-        "cleanUrls": true
+        "cleanUrls": true,
+        "includeFiles": ["public/**"]
       }
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { 
-      "src": "/manifest.json", 
-      "headers": { "Content-Type": "application/manifest+json" }
-    },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  { "src": "/static/(.*)", "dest": "/static/$1" },
+  { "src": "/manifest.json", "headers": { "Content-Type": "application/manifest+json" }},
+  { "src": "/api/(.*)", "dest": "/api/$1" },
+  { "src": "/(.*)", "dest": "/index.html" }
+]
+
 }

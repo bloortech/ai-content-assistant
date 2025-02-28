@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }

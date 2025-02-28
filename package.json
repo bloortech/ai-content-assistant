@@ -1,5 +1,6 @@
 {
   "name": "ai-content-assistant",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,10 +30,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp public/manifest.json build/manifest.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build"
+    "deploy": "react-scripts build",
+    "dev": "npm run build && vercel dev --yes"
   },
   "eslintConfig": {
     "extends": [
@@ -54,5 +56,6 @@
   },
   "devDependencies": {
     "npm-check-updates": "^17.1.14"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
